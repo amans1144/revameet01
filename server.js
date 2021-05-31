@@ -60,6 +60,5 @@ const corsOptions = {
     }
   },
 };
-app.use(cors(corsOptions));
 
 server.listen(process.env.PORT || 3030);
