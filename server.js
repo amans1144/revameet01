@@ -32,5 +32,34 @@ io.on("connection", (socket) => {
     });
   });
 });
+// heroku----------- work to server react
+const path = require("path");
+if (process.env.NODE_ENV === "production") {
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, "client/build")));
+  // Handle React routing, return all requests to React app
+  app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "client/build", "index.html"));
+  });
+}
+// adding middleware ----------*********
+const whitelist = [
+  "http://localhost:3000",
+  "http://localhost:3030",
+  "https://shrouded-journey-38552.heroku",
+];
+const corsOptions = {
+  origin: function (origin, callback) {
+    console.log("** Origin of request " + origin);
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      console.log("Origin acceptable");
+      callback(null, true);
+    } else {
+      console.log("Origin rejected");
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+};
+app.use(cors(corsOptions));
 
 server.listen(process.env.PORT || 3030);
