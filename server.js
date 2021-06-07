@@ -45,7 +45,7 @@ if (process.env.NODE_ENV === "production") {
 // adding middleware ----------*********
 const whitelist = [
   "http://localhost:3000",
-  "http://localhost:3030",
+
   "https://shrouded-journey-38552.heroku",
 ];
 const corsOptions = {
