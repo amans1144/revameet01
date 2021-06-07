@@ -10,12 +10,16 @@ const peerServer = ExpressPeerServer(server, {
   debug: true,
 });
 
+app.get("/api", (req, res) => {
+  res.redirect(`/${uuidv4()}`);
+});
+
 app.set("view engine", "ejs");
-app.use(express.static("public"));
+//app.use(express.static(__dirname + "/public"));
 app.use("/peerjs", peerServer);
 
-app.get("/", (req, rsp) => {
-  rsp.redirect(`/${uuidv4()}`);
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build", "index.html"));
 });
 
 app.get("/:room", (req, res) => {
@@ -32,7 +36,7 @@ io.on("connection", (socket) => {
     });
   });
 });
-// heroku----------- work to server react
+// heroku----------- work to serve react
 const path = require("path");
 if (process.env.NODE_ENV === "production") {
   // Serve any static files
@@ -45,20 +49,27 @@ if (process.env.NODE_ENV === "production") {
 // adding middleware ----------*********
 const whitelist = [
   "http://localhost:3000",
+  "http://localhost:3001",
 
   "https://shrouded-journey-38552.heroku",
 ];
-const corsOptions = {
-  origin: function (origin, callback) {
-    console.log("** Origin of request " + origin);
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
-      console.log("Origin acceptable");
-      callback(null, true);
-    } else {
-      console.log("Origin rejected");
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-};
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     console.log("** Origin of request " + origin);
+//     if (whitelist.indexOf(origin) !== -1 || !origin) {
+//       console.log("Origin acceptable");
+//       callback(null, true);
+//     } else {
+//       console.log("Origin rejected");
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+// };
 
-server.listen(process.env.PORT || 3030);
+// app.use(express.static(path.resolve(__dirname, "../client/build")));
+
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+// });
+
+server.listen(process.env.PORT || 3001);
