@@ -18,7 +18,7 @@ export const Home = () => {
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
-            <a href="#Help">Help</a>
+            <a href="#Help">Hellp</a>
             <a href="#login">Login</a>
           </Navbar.Text>
         </Navbar.Collapse>
