@@ -19,7 +19,7 @@ export const Home = () => {
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
             <a href="#Help">Hellp</a>
-            <a href="#login">Login</a>
+            <a href="#login">Login </a>
           </Navbar.Text>
         </Navbar.Collapse>
       </Navbar>
@@ -47,7 +47,7 @@ export const Home = () => {
           <br /> Rukmini Knowledge Park Kattigenahalli, <br /> Yelahanka,
           Bangalore 560 064 Karnataka,
           <br /> India. admissions@reva.edu.in <br /> +91- 90211 90211
-          080-46966966v
+          080-46966966v bla bla bla
         </p>
       </footer>
     </>
